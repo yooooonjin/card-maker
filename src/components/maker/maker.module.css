@@ -1,0 +1,10 @@
+@value makerGreen, makerBlack, makerWhite from '../../common/colors.css';
+
+.container {
+  width: 80%;
+  text-align: center;
+  background-color: makerWhite;
+}
+.cardMaker {
+  height: 50em;
+}

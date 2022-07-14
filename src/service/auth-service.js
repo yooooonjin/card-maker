@@ -3,19 +3,29 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
   GithubAuthProvider,
+  onAuthStateChanged,
 } from 'firebase/auth';
 
 class AuthService {
   constructor(firebaseApp) {
-    this.auth = getAuth(firebaseApp);
+    this.firebaseAuth = getAuth(firebaseApp);
   }
   login(providerName) {
-    console.log('providerName : ' + providerName);
     const authProvider =
       providerName === 'Google'
         ? new GoogleAuthProvider()
         : new GithubAuthProvider();
-    signInWithPopup(this.auth, authProvider);
+    return signInWithPopup(this.firebaseAuth, authProvider);
+  }
+
+  logout() {
+    this.firebaseAuth.signOut();
+  }
+
+  onAuthChange(onUserChanged) {
+    onAuthStateChanged(this.firebaseAuth, (user) => {
+      onUserChanged(user);
+    });
   }
 }
 
