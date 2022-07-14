@@ -1,0 +1,13 @@
+@value makerGreen, makerWhite from '../../common/colors.css';
+
+.footer {
+  background-color: makerGreen;
+  color: makerWhite;
+}
+.footer {
+  height: 3em;
+}
+.footer p {
+  transform: translateY(80%);
+  font-size: 0.8rem;
+}

@@ -1,0 +1,24 @@
+@value makerPink, makerWhite from '../../common/colors.css';
+
+.container {
+  width: 25rem;
+  text-align: center;
+  background-color: makerWhite;
+}
+
+.login {
+  margin-bottom: 1em;
+  padding: 0;
+}
+.login button {
+  cursor: pointer;
+  margin: 0 auto 0.7em;
+  width: 80%;
+  border: 2px solid black;
+  padding: 0.7em;
+  border-radius: 1.5em;
+}
+
+.login button:hover {
+  background-color: makerPink;
+}
