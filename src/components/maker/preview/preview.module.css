@@ -1,0 +1,11 @@
+@value makerGreen from '../../../common/colors.css';
+
+.preview {
+  flex: 1 1 50%;
+}
+.title {
+  color: makerGreen;
+  font-weight: bold;
+  font-size: 1.3rem;
+  padding-top: 0.8em;
+}
