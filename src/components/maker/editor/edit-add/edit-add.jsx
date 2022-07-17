@@ -3,7 +3,7 @@ import Button from '../../../button/button';
 import ImageFileInput from '../../../image_file_input/image_file_input';
 import styles from './edit-add.module.css';
 
-const EditAdd = ({ addCard }) => {
+const EditAdd = ({ CreateOrUpdateCard }) => {
   const nameRef = useRef();
   const companyRef = useRef();
   const themeRef = useRef();
@@ -25,7 +25,7 @@ const EditAdd = ({ addCard }) => {
       fileName: '',
       fileURL: '',
     };
-    addCard(card);
+    CreateOrUpdateCard(card);
     formRef.current.reset();
   };
 

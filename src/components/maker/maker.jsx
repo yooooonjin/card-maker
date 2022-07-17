@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import Footer from '../footer/footer';
 import Header from '../header/header';
 import styles from './maker.module.css';
@@ -9,8 +9,8 @@ import Preview from './preview/preview';
 const Maker = ({ authService }) => {
   const navigate = useNavigate();
 
-  const [cards, setCards] = useState([
-    {
+  const [cards, setCards] = useState({
+    1: {
       id: '1',
       name: 'Yoonjin',
       company: 'Samsung Electronics',
@@ -21,7 +21,7 @@ const Maker = ({ authService }) => {
       fileName: 'yoonjin',
       fileURL: 'yoonjin.png',
     },
-    {
+    2: {
       id: '2',
       name: 'Yoonjin',
       company: 'Samsung Electronics',
@@ -32,7 +32,7 @@ const Maker = ({ authService }) => {
       fileName: 'yoonjin',
       fileURL: 'yoonjin.png',
     },
-    {
+    3: {
       id: '3',
       name: 'Yoonjin',
       company: 'Samsung Electronics',
@@ -43,16 +43,28 @@ const Maker = ({ authService }) => {
       fileName: 'yoonjin',
       fileURL: 'yoonjin.png',
     },
-  ]);
+  });
 
   const onLogout = () => {
     authService.logout();
   };
 
-  const onAdd = (card) => {
-    const add = [...cards, card];
-    setCards(add);
+  const CreateOrUpdateCard = (card) => {
+    setCards((cards) => {
+      const updated = { ...cards };
+      updated[card.id] = card;
+      return updated;
+    });
   };
+
+  const deleteCard = (card) => {
+    setCards((cards) => {
+      const deleted = { ...cards };
+      delete deleted[card.id];
+      return deleted;
+    });
+  };
+
   useEffect(() => {
     authService.onAuthChange((user) => {
       if (!user) {
@@ -64,7 +76,12 @@ const Maker = ({ authService }) => {
     <section className={styles.container}>
       <Header onLogout={onLogout} />
       <section className={styles.maker}>
-        <Editor cards={cards} setCards={setCards} addCard={onAdd} />
+        <Editor
+          cards={cards}
+          setCards={setCards}
+          deleteCard={deleteCard}
+          CreateOrUpdateCard={CreateOrUpdateCard}
+        />
         <div className={styles.line}></div>
         <Preview cards={cards} />
       </section>
