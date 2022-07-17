@@ -4,7 +4,6 @@
 .container {
   width: 80%;
   height: 100%;
-  text-align: center;
   background-color: makerWhite;
   display: flex;
   flex-direction: column;
@@ -15,7 +14,8 @@
 }
 
 .line {
-  border: 1px solid makerLightGrey;
+  width: 1px;
+  background-color: makerLightGrey;
 }
 
 @media screen and (max-width: mediaQuery) {

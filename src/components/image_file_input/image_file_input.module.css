@@ -1,0 +1,7 @@
+@value makerGreen, makerWhite from '../../common/colors.css';
+
+.button {
+  border: 0;
+  background-color: makerWhite;
+  cursor: pointer;
+}

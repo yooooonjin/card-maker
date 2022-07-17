@@ -1,0 +1,43 @@
+@value makerShadow, makerColorful, makerWheat, makerGreen , makerBlack,makerWhite from '../../../../common/colors.css';
+
+.editForm {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  border: 0;
+  border-top: 1px solid makerBlack;
+  border-left: 1px solid makerBlack;
+  margin-bottom: 1em;
+}
+.input,
+.select,
+.textarea,
+.button,
+.fileInput {
+  width: 100%;
+  padding: 0.2em 0.8em;
+  border: 0;
+  border-bottom: 1px solid makerBlack;
+  border-right: 1px solid makerBlack;
+}
+
+.input,
+.select,
+.button,
+.fileInput {
+  flex: 1 1 30%;
+}
+.textarea {
+  width: 100%;
+}
+.fileInput {
+  cursor: pointer;
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus,
+.button:focus,
+.fileInput:focus {
+  outline: 0;
+}
