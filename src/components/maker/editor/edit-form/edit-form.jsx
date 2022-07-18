@@ -1,16 +1,24 @@
 import React from 'react';
 import Button from '../../../button/button';
-import ImageFileInput from '../../../image_file_input/image_file_input';
 import styles from './edit-form.module.css';
 
-const EditForm = ({ card, deleteCard, CreateOrUpdateCard }) => {
+const EditForm = ({ FileInput, card, deleteCard, createOrUpdateCard }) => {
   const { name, company, title, email, message, fileName, theme } = card;
+
+  const onFileChange = (file) => {
+    createOrUpdateCard({
+      ...card,
+      fileName: file.name,
+      fileURL: file.url,
+    });
+  };
+
   const onChange = (event) => {
     if (event.currentTarget.name === null) {
       return;
     }
     event.preventDefault();
-    CreateOrUpdateCard({
+    createOrUpdateCard({
       ...card,
       [event.currentTarget.name]: event.currentTarget.value,
     });
@@ -20,6 +28,7 @@ const EditForm = ({ card, deleteCard, CreateOrUpdateCard }) => {
     event.preventDefault();
     deleteCard(card);
   };
+
   return (
     <form className={styles.editForm}>
       <input
@@ -62,7 +71,7 @@ const EditForm = ({ card, deleteCard, CreateOrUpdateCard }) => {
         onChange={onChange}
       />
       <div className={styles.fileInput}>
-        <ImageFileInput fileName={fileName} />
+        <FileInput onFileChange={onFileChange} fileName={fileName} />
       </div>
       <Button name='Delete' onClick={onSubmit} />
     </form>

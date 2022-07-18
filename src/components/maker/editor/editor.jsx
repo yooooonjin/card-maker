@@ -3,19 +3,20 @@ import EditAdd from './edit-add/edit-add';
 import EditForm from './edit-form/edit-form';
 import styles from './editor.module.css';
 
-const Editor = ({ cards, deleteCard, CreateOrUpdateCard }) => (
+const Editor = ({ FileInput, cards, deleteCard, createOrUpdateCard }) => (
   <section className={styles.editor}>
     <div className={styles.title}>Card Maker</div>
     <section>
       {Object.keys(cards).map((key) => (
         <EditForm
-          card={cards[key]}
           key={key}
+          FileInput={FileInput}
+          card={cards[key]}
           deleteCard={deleteCard}
-          CreateOrUpdateCard={CreateOrUpdateCard}
+          createOrUpdateCard={createOrUpdateCard}
         />
       ))}
-      <EditAdd CreateOrUpdateCard={CreateOrUpdateCard} />
+      <EditAdd FileInput={FileInput} createOrUpdateCard={createOrUpdateCard} />
     </section>
   </section>
 );

@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import Editor from './editor/editor';
 import Preview from './preview/preview';
 
-const Maker = ({ authService }) => {
+const Maker = ({ FileInput, authService }) => {
   const navigate = useNavigate();
 
   const [cards, setCards] = useState({
@@ -18,8 +18,8 @@ const Maker = ({ authService }) => {
       title: 'Software Engineer',
       email: 'yoonjin950109@gmail.com',
       message: 'I love coding',
-      fileName: 'yoonjin',
-      fileURL: 'yoonjin.png',
+      fileName: '',
+      fileURL: '',
     },
     2: {
       id: '2',
@@ -29,8 +29,8 @@ const Maker = ({ authService }) => {
       title: 'Software Engineer',
       email: 'yoonjin950109@gmail.com',
       message: 'I love coding',
-      fileName: 'yoonjin',
-      fileURL: 'yoonjin.png',
+      fileName: '',
+      fileURL: '',
     },
     3: {
       id: '3',
@@ -40,8 +40,8 @@ const Maker = ({ authService }) => {
       title: 'Software Engineer',
       email: 'yoonjin950109@gmail.com',
       message: 'I love coding',
-      fileName: 'yoonjin',
-      fileURL: 'yoonjin.png',
+      fileName: '',
+      fileURL: '',
     },
   });
 
@@ -49,7 +49,7 @@ const Maker = ({ authService }) => {
     authService.logout();
   };
 
-  const CreateOrUpdateCard = (card) => {
+  const createOrUpdateCard = (card) => {
     setCards((cards) => {
       const updated = { ...cards };
       updated[card.id] = card;
@@ -77,10 +77,11 @@ const Maker = ({ authService }) => {
       <Header onLogout={onLogout} />
       <section className={styles.maker}>
         <Editor
+          FileInput={FileInput}
           cards={cards}
           setCards={setCards}
           deleteCard={deleteCard}
-          CreateOrUpdateCard={CreateOrUpdateCard}
+          createOrUpdateCard={createOrUpdateCard}
         />
         <div className={styles.line}></div>
         <Preview cards={cards} />
