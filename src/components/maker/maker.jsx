@@ -2,48 +2,18 @@ import React, { useCallback, useEffect, useState } from 'react';
 import Footer from '../footer/footer';
 import Header from '../header/header';
 import styles from './maker.module.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Editor from './editor/editor';
 import Preview from './preview/preview';
+import userEvent from '@testing-library/user-event';
 
-const Maker = ({ FileInput, authService }) => {
+const Maker = ({ FileInput, authService, cardRepository }) => {
+  const location = useLocation();
+  const locationState = location?.state;
+
   const navigate = useNavigate();
-
-  const [cards, setCards] = useState({
-    1: {
-      id: '1',
-      name: 'Yoonjin',
-      company: 'Samsung Electronics',
-      theme: 'Dark',
-      title: 'Software Engineer',
-      email: 'yoonjin950109@gmail.com',
-      message: 'I love coding',
-      fileName: '',
-      fileURL: '',
-    },
-    2: {
-      id: '2',
-      name: 'Yoonjin',
-      company: 'Samsung Electronics',
-      theme: 'White',
-      title: 'Software Engineer',
-      email: 'yoonjin950109@gmail.com',
-      message: 'I love coding',
-      fileName: '',
-      fileURL: '',
-    },
-    3: {
-      id: '3',
-      name: 'Yoonjin',
-      company: 'Samsung Electronics',
-      theme: 'Colorful',
-      title: 'Software Engineer',
-      email: 'yoonjin950109@gmail.com',
-      message: 'I love coding',
-      fileName: '',
-      fileURL: '',
-    },
-  });
+  const [cards, setCards] = useState({});
+  const [userId, setUserId] = useState(locationState && locationState.id);
 
   const onLogout = () => {
     authService.logout();
@@ -55,6 +25,7 @@ const Maker = ({ FileInput, authService }) => {
       updated[card.id] = card;
       return updated;
     });
+    cardRepository.saveCard(userId, card);
   };
 
   const deleteCard = (card) => {
@@ -63,15 +34,28 @@ const Maker = ({ FileInput, authService }) => {
       delete deleted[card.id];
       return deleted;
     });
+    cardRepository.removeCard(userId, card);
   };
 
   useEffect(() => {
+    if (!userId) {
+      return;
+    }
+    const stopSync = cardRepository.syncCard(userId, (cards) => {
+      setCards(cards);
+    });
+    return () => stopSync();
+  }, [userId, cardRepository]);
+
+  useEffect(() => {
     authService.onAuthChange((user) => {
-      if (!user) {
+      if (user) {
+        setUserId(user.uid);
+      } else {
         navigate('/');
       }
     });
-  });
+  }, [authService, userId, navigate]);
   return (
     <section className={styles.container}>
       <Header onLogout={onLogout} />

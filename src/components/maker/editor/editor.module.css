@@ -3,6 +3,7 @@
 .editor {
   flex: 1 1 50%;
   padding: 0 1em;
+  overflow-y: auto;
 }
 .title {
   text-align: center;

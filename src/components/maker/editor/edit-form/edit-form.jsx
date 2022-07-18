@@ -45,7 +45,12 @@ const EditForm = ({ FileInput, card, deleteCard, createOrUpdateCard }) => {
         value={company}
         onChange={onChange}
       />
-      <select className={styles.select} name='theme' value={theme}>
+      <select
+        className={styles.select}
+        name='theme'
+        defaultValue={theme}
+        onChange={onChange}
+      >
         <option value='Dark'>Dark</option>
         <option value='White'>White</option>
         <option value='Colorful'>Colorful</option>

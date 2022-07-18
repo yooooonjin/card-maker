@@ -8,7 +8,7 @@ import {
 
 class AuthService {
   constructor(firebaseApp) {
-    this.firebaseAuth = getAuth(firebaseApp);
+    this.firebaseAuth = getAuth();
   }
   login(providerName) {
     const authProvider =
