@@ -1,8 +1,10 @@
-@value makerGray ,makerGreen, makerWhite from '../../common/colors.css';
+@value makerPink,makerLightPink,makerLightGrey,makerGray ,makerGreen, makerWhite from '../../common/colors.css';
 .container {
   width: 100%;
-  height: 100%;
+  height: 2em;
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .input {
   display: none;
@@ -15,4 +17,28 @@
   background-color: makerGray;
   cursor: pointer;
   font-weight: bold;
+}
+
+.gray {
+  background-color: makerGray;
+}
+.pink {
+  background-color: makerLightPink;
+}
+.loading {
+  padding: 0.3em 0;
+  width: 1.5em;
+  height: 1.5em;
+  border: 3px solid makerLightGrey;
+  border-radius: 50%;
+  border-top: 3px solid makerPink;
+  animation: spin 2s linear infinite;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
